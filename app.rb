@@ -13,10 +13,31 @@ require "sinatra/activerecord"
 
 # TODO
 
-# As a user I can list all the restaurants
-# As a user I can see one restaurant's details
-# As a user I can add a restaurant
+# As a user I can list all the restaurants DONE
+# As a user I can see one restaurant's details DONE
+# As a user I can add a restaurant DONE
 
-get "/" do
-  "Hello world!"
+# Ruby embedded into view files
+# pe + tab   ->    <%=  %>     (display something)
+# er + tab   ->    <%   %>     (display nothing)
+
+# get == Read
+# post == Create
+get "/restaurants" do
+  @restaurants = Restaurant.all
+  erb :index
+end
+
+get "/restaurants/:id" do
+  restaurant_id = params[:id]
+  @restaurant = Restaurant.find(restaurant_id)
+  erb :show
+end
+
+post "/restaurants" do
+  # Save the restaurant into the DB
+  name = params[:name]
+  city = params[:city]
+  Restaurant.create(name: name, city: city)
+  redirect "/restaurants"
 end

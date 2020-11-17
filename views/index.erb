@@ -1,0 +1,19 @@
+<h1>My restaurant list</h1>
+<ul>
+  <% @restaurants.each do |restaurant| %>
+    <li>
+      <a href="/restaurants/<%= restaurant.id %>">
+        <%= restaurant.name.capitalize %> (<%= restaurant.city.capitalize %>)
+      </a>
+    </li>
+  <% end %>
+</ul>
+
+<h2>List a new restaurant</h2>
+<form action="/restaurants" method="post">
+  <label for="name">New name</label>
+  <input type="text" name="name">
+  <label for="city">New city</label>
+  <input type="text" name="city">
+  <input type="submit">
+</form>
